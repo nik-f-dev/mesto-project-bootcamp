@@ -1,0 +1,8 @@
+.photo-grid__like {
+  background: url(./../../../images/heart.png) no-repeat;
+  background-size: contain;
+  display: flex;
+  align-self: center;
+  width: 22px;
+  height: 19px;
+}
