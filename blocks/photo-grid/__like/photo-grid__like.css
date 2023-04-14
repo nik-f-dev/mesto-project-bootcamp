@@ -5,4 +5,13 @@
   align-self: center;
   width: 22px;
   height: 19px;
+  cursor: pointer;
+}
+
+.photo-grid__like:hover {
+  opacity: .7;
+}
+
+.photo-grid__like:active {
+  background: url(./../../../images/Union.png) ;
 }

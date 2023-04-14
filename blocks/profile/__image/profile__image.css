@@ -6,3 +6,16 @@
   border-radius: 50%;
   margin-top: 36px;
 }
+
+@media screen and (max-width: 730px) {
+  .profile__image {
+    margin: 26px auto 0;
+
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile__image {
+    margin: 42px auto 0;
+  }
+}

@@ -10,6 +10,18 @@
 
 <body>
   <div class="page">
+
+    <div class="popup">
+      <form class="popup__container" action="#">
+        <div class="popup__button-close"></div>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input class="popup__item" type="text" required placeholder="Введите имя профиля..." name="profile-name"
+          id="profile-name">
+        <input class="popup__item" type="text" required placeholder="Введите описание..." name="description">
+        <button class="popup__button-save" type="submit" id="description">Сохранить</button>
+      </form>
+    </div>
+
     <header class="header">
       <div class="header__logo"></div>
     </header>
@@ -20,8 +32,8 @@
         <div class="profile__text">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <p class="profile__subtitle">Исследователь океана</p>
+          <div class="profile__edit-button"></div>
         </div>
-        <div class="profile__edit-button"></div>
         <div class="profile__add-button"></div>
       </section>
 
