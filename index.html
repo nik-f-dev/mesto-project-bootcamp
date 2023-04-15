@@ -10,31 +10,25 @@
 
 <body>
   <div class="page">
-
-    <div class="popup popup_opened">
-      <form class="popup__container" action="#">
-        <div class="popup__button-close"></div>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__item" type="text" required placeholder="Введите имя профиля..." name="profile-name"
-          id="profile-name">
-        <input class="popup__item" type="text" required placeholder="Введите описание..." name="description">
-        <button class="popup__button-save" type="submit" id="description">Сохранить</button>
-      </form>
-    </div>
-
     <header class="header">
       <div class="header__logo"></div>
     </header>
 
     <main class="content">
       <section class="profile">
-        <div class="profile__image"></div>
-        <div class="profile__text">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <p class="profile__subtitle">Исследователь океана</p>
-          <div class="profile__edit-button"></div>
+        <div class="profile__container">
+          <div class="profile__image"></div>
+          <div class="profile__text">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <p class="profile__subtitle">Исследователь океана</p>
+          </div>
+          <button type="button" class="profile__button" name="edit-button">
+            <div class="profile__edit-button"></div>
+          </button>
         </div>
-        <div class="profile__add-button"></div>
+        <button type="button" class="profile__button" name="add-button">
+          <div class="profile__add-button"></div>
+        </button>
       </section>
 
       <section class="photo-grid">
@@ -42,43 +36,55 @@
           <li class="photo-grid__item">
             <img class="photo-grid__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск">
             <div class="photo-grid__container">
-              <p class="photo-grid__title">Карачаевск</p>
-              <div class="photo-grid__like"></div>
+              <h2 class="photo-grid__title">Карачаевск</h2>
+              <button type="button" class="photo-grid__button" name="like-button">
+                <div class="photo-grid__like"></div>
+              </button>
             </div>
           </li>
           <li class="photo-grid__item">
             <img class="photo-grid__image" src="./images/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус">
             <div class="photo-grid__container">
-              <p class="photo-grid__title">Гора Эльбрус</p>
-              <div class="photo-grid__like"></div>
+              <h2 class="photo-grid__title">Гора Эльбрус</h2>
+              <button type="button" class="photo-grid__button" name="like-button">
+                <div class="photo-grid__like"></div>
+              </button>
             </div>
           </li>
           <li class="photo-grid__item">
             <img class="photo-grid__image" src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай">
             <div class="photo-grid__container">
-              <p class="photo-grid__title">Домбай</p>
-              <div class="photo-grid__like"></div>
+              <h2 class="photo-grid__title">Домбай</h2>
+              <button type="button" class="photo-grid__button" name="like-button">
+                <div class="photo-grid__like"></div>
+              </button>
             </div>
           </li>
           <li class="photo-grid__item">
             <img class="photo-grid__image" src="./images/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус">
             <div class="photo-grid__container">
-              <p class="photo-grid__title">Гора Эльбрус</p>
-              <div class="photo-grid__like"></div>
+              <h2 class="photo-grid__title">Гора Эльбрус</h2>
+              <button type="button" class="photo-grid__button" name="like-button">
+                <div class="photo-grid__like"></div>
+              </button>
             </div>
           </li>
           <li class="photo-grid__item">
             <img class="photo-grid__image" src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай">
             <div class="photo-grid__container">
-              <p class="photo-grid__title">Домбай</p>
-              <div class="photo-grid__like"></div>
+              <h2 class="photo-grid__title">Домбай</h2>
+              <button type="button" class="photo-grid__button" name="like-button">
+                <div class="photo-grid__like"></div>
+              </button>
             </div>
           </li>
           <li class="photo-grid__item">
             <img class="photo-grid__image" src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск">
             <div class="photo-grid__container">
-              <p class="photo-grid__title">Карачаевск</p>
-              <div class="photo-grid__like"></div>
+              <h2 class="photo-grid__title">Карачаевск</h2>
+              <button type="button" class="photo-grid__button" name="like-button">
+                <div class="photo-grid__like"></div>
+              </button>
             </div>
           </li>
         </ul>
@@ -88,6 +94,17 @@
     <footer class="footer">
       <p class="footer__author">&copy; 2020 Mesto Russia</p>
     </footer>
+  </div>
+
+  <div class="popup">
+    <form class="popup__container" action="#" name="popup">
+      <div class="popup__button-close"></div>
+      <h3 class="popup__title">Редактировать профиль</h3>
+      <input class="popup__item" type="text" required placeholder="Введите имя профиля..." name="profile-name"
+        id="profile-name">
+      <input class="popup__item" type="text" required placeholder="Введите описание..." name="description">
+      <button class="popup__button-save" type="submit" id="description">Сохранить</button>
+    </form>
   </div>
 </body>
 

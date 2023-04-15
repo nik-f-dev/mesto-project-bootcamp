@@ -1,5 +1,6 @@
 .photo-grid__like {
-  background: url(./../../../images/heart.png) no-repeat;
+  background-image: url(./../../../images/heart.svg);
+  background-repeat: no-repeat;
   background-size: contain;
   display: flex;
   align-self: center;
@@ -7,6 +8,8 @@
   height: 19px;
   cursor: pointer;
   margin-right: 4px;
+  transition: opacity .4s linear;
+  transition: background .6s linear;
 }
 
 .photo-grid__like:hover {
@@ -14,5 +17,5 @@
 }
 
 .photo-grid__like:active {
-  background: url(./../../../images/Union.png) ;
+  background-image: url(./../../../images/Union.svg) ;
 }

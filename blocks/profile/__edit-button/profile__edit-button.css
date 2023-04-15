@@ -4,9 +4,8 @@
   width: 24px;
   height: 24px;
   cursor: pointer;
-  position: absolute;
-  top: 15px;
-  right: -43px;
+  transition: opacity .4s linear;
+  margin: 17px 0 0 20px;
 }
 
 .profile__edit-button:hover {
