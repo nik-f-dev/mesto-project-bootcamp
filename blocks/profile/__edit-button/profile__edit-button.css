@@ -6,7 +6,7 @@
   cursor: pointer;
   position: absolute;
   top: 15px;
-  right: -40px;
+  right: -43px;
 }
 
 .profile__edit-button:hover {
@@ -17,7 +17,7 @@
   .profile__edit-button {
     width: 18px;
     height: 18px;
-    top: 10px;
+    top: 7px;
     right: -28px;
   }
 }
