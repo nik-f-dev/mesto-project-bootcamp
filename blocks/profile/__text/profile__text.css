@@ -6,11 +6,11 @@
 
 @media screen and (max-width: 730px) {
   .profile__text {
-    margin: 26px auto 36px;
+    margin: 26px auto 14px;
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .profile__text {
     max-width: 189px;
   }
