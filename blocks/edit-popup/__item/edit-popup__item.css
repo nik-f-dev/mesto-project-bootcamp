@@ -1,0 +1,18 @@
+.edit-popup__item {
+  margin: 0 auto;
+  padding: 30px 0 9px;
+  display: block;
+  width: 358px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  font-family: 'Inter', sans-serif;
+}
+
+@media screen and (max-width: 540px) {
+  .edit-popup__item {
+    width: 238px;
+  }
+}

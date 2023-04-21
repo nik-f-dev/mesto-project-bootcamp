@@ -96,20 +96,34 @@
     </footer>
   </div>
 
-  <div class="popup">
-    <form class="popup__container" name="popup">
-      <button type="button" class="popup__button" name="close-button">
-        <div class="popup__button-close"></div>
+  <div class="edit-popup">
+    <form class="edit-popup__edit-form" name="edit-popup">
+      <button type="button" class="edit-popup__button" name="close-edit-form">
+        <div class="edit-popup__button-close"></div>
       </button>
-      <h3 class="popup__title">Редактировать профиль</h3>
-      <input class="popup__item" type="text" required placeholder="Введите имя профиля..." name="profile-name"
-        id="popup__name">
-      <input class="popup__item" type="text" required placeholder="Введите описание..." name="description"
-        id="popup__description">
-      <button class="popup__button-save" type="submit" id="description">Сохранить</button>
+      <h3 class="edit-popup__title">Редактировать профиль</h3>
+      <input class="edit-popup__item" type="text" required placeholder="Введите имя профиля..." name="profile-name"
+        id="edit-popup__name">
+      <input class="edit-popup__item" type="text" required placeholder="Введите описание..." name="description"
+        id="edit-popup__description">
+      <button class="edit-popup__button-save" type="submit" id="description">Сохранить</button>
     </form>
+
   </div>
 
+  <div class="add-popup">
+    <form class="add-popup__add-form" name="add-popup">
+      <button type="button" class="add-popup__button" name="close-add-form">
+        <div class="add-popup__button-close"></div>
+      </button>
+      <h3 class="add-popup__title">Новое место</h3>
+      <input class="add-popup__item" type="text" required placeholder="Название" name="place-name"
+        id="add-popup__form-name">
+      <input class="add-popup__item" type="text" required placeholder="Ссылка на картинку" name="img-link"
+        id="add-popup__link">
+      <button class="add-popup__button-save" type="submit" id="description">Создать</button>
+    </form>
+  </div>
   <script src="script.js"></script>
 </body>
 

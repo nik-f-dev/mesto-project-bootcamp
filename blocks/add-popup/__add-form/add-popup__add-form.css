@@ -1,0 +1,15 @@
+.add-popup__add-form {
+  width: 430px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 540px) {
+  .add-popup__add-form {
+    width: 282px;
+  }
+}
