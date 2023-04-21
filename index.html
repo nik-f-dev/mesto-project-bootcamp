@@ -98,14 +98,18 @@
 
   <div class="popup">
     <form class="popup__container" action="#" name="popup">
-      <div class="popup__button-close"></div>
+      <button type="button" class="popup__button" name="close-button">
+        <div class="popup__button-close"></div>
+      </button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <input class="popup__item" type="text" required placeholder="Введите имя профиля..." name="profile-name"
-        id="profile-name">
-      <input class="popup__item" type="text" required placeholder="Введите описание..." name="description">
+        id="popup__name">
+      <input class="popup__item" type="text" required placeholder="Введите описание..." name="description"
+        id="popup__description">
       <button class="popup__button-save" type="submit" id="description">Сохранить</button>
     </form>
   </div>
+
   <script src="script.js"></script>
 </body>
 

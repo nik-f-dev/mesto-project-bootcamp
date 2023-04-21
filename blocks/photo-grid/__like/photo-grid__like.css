@@ -8,8 +8,8 @@
   height: 19px;
   cursor: pointer;
   margin-right: 4px;
-  transition: opacity .4s linear;
-  transition: background .6s linear;
+  transition: opacity .3s linear;
+  transition: background-image .4s ease-in-out;
 }
 
 .photo-grid__like:hover {
