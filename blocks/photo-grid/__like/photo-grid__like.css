@@ -9,13 +9,10 @@
   cursor: pointer;
   margin-right: 4px;
   transition: opacity .3s linear;
-  transition: background-image .4s ease-in-out;
+  /* transition: background-image .4s ease-in-out; */
 }
 
 .photo-grid__like:hover {
   opacity: .7;
 }
 
-.photo-grid__like:active {
-  background-image: url(./../../../images/Union.svg) ;
-}
