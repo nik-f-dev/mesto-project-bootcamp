@@ -1,3 +1,5 @@
+import './../pages/index.css';
+
 // init profile
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -6,14 +8,12 @@ const descriptionProfile = document.querySelector('.profile__subtitle');
 
 // init edit-popup
 const editPopup = document.querySelector('.edit-popup');
-const closeEditButton = document.querySelector('.popup__button-close');
 const elementEditForm = document.querySelector('.edit-popup__edit-form');
 const editPopupName = document.querySelector('#edit-popup__name');
 const editPopupDescription = document.querySelector('#edit-popup__description');
 
 // init add-popup
 const addPopup = document.querySelector('.add-popup');
-const closeAddButton = document.querySelector('.add-popup__button-close');
 const elementAddForm = document.querySelector('.add-popup__add-form');
 const addPopupName = document.querySelector('#add-popup__name');
 const addPopupLink = document.querySelector('#add-popup__link');
@@ -21,7 +21,6 @@ const addPopupLink = document.querySelector('#add-popup__link');
 //init img-popup
 const imgPopup = document.querySelector('.img-popup');
 const photo = document.querySelector('.popup__photo');
-const imageButtonClose = document.querySelector('.img-popup__button');
 const imgTitle = document.querySelector('.popup__img-title');
 
 //init photo-grid

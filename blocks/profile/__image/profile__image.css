@@ -1,5 +1,5 @@
 .profile__image {
-  background-image: url(./../../../images/image.jpg);
+  background-image: url(./../../../src/images/image.jpg);
   background-size: contain;
   background-repeat: no-repeat;
   width: 120px;
