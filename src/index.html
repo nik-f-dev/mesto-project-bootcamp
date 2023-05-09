@@ -41,28 +41,40 @@
   </div>
 
   <div class="popup edit-popup">
-    <form class="popup__container popup__container_type-form edit-popup__edit-form" name="edit-popup">
+    <form class="popup__container popup__container_type-form edit-popup__edit-form" name="edit-popup" novalidate>
       <button type="button" class="popup__button-close edit-popup__button-close " name="close-edit-form">
       </button>
       <h3 class="popup__title edit-popup__title">Редактировать профиль</h3>
-      <input class="popup__item edit-popup__item" type="text" required placeholder="Введите имя профиля..."
-        name="profile-name" id="edit-popup__name">
-      <input class="popup__item edit-popup__item" type="text" required placeholder="Введите описание..."
-        name="description" id="edit-popup__description">
+      <label class="popup__field">
+        <input class="popup__item edit-popup__item" type="text" required placeholder="Введите имя профиля..."
+          name="profile-name" id="edit-popup__name">
+        <span class="popup__input-error">Введите</span>
+      </label>
+      <label class="popup__field">
+        <input class="popup__item edit-popup__item" type="text" required placeholder="Введите описание..."
+          name="description" id="edit-popup__description">
+        <span class="popup__input-error">Введите</span>
+      </label>
       <button class="popup__button-save edit-popup__button-save" type="submit"
         id="edit-popup__save-button">Сохранить</button>
     </form>
   </div>
 
   <div class="popup add-popup">
-    <form class="popup__container popup__container_type-form add-popup__add-form" name="add-popup">
+    <form class="popup__container popup__container_type-form add-popup__add-form" name="add-popup" novalidate>
       <button type="button" class="popup__button-close add-popup__button-close" name="close-edit-form">
       </button>
-      <h3 class="popup__title add-popup__title">Редактировать профиль</h3>
-      <input class="popup__item add-popup__item" type="text" required placeholder="Название" name="place-name"
-        id="add-popup__name">
-      <input class="popup__item add-popup__item" type="text" required placeholder="Ссылка на картинку"
-        name="description" id="add-popup__link">
+      <h3 class="popup__title add-popup__title">Новое место</h3>
+      <label class="popup__field">
+        <input class="popup__item add-popup__item" type="text" required placeholder="Название" name="place-name"
+          id="add-popup__name">
+        <span class="popup__input-error">1</span>
+      </label>
+      <label class="popup__field">
+        <input class="popup__item add-popup__item" type="text" required placeholder="Ссылка на картинку"
+          name="description" id="add-popup__link">
+        <span class="popup__input-error">2</span>
+      </label>
       <button class="popup__button-save add-popup__button-save" type="submit"
         id="add-popup__save-button">Сохранить</button>
     </form>

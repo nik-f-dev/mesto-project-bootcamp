@@ -1,6 +1,6 @@
 .popup__item {
-  margin: 0 auto;
-  padding: 30px 0 9px;
+  margin: 15px auto 0;
+  padding: 15px 0 9px;
   display: block;
   width: 358px;
   border: none;
@@ -16,3 +16,12 @@
     width: 238px;
   }
 }
+
+.popup__item:valid {
+  border-bottom: 1px solid green;
+}
+
+.popup__item:invalid {
+  border-bottom: 1px solid red;
+}
+
