@@ -1,0 +1,23 @@
+.popup__item-error_active {
+  position: absolute;
+  top: 57px;
+  left: 0;
+  max-width: 358px;
+  margin: 5px 0 0 36px;
+  padding: 0;
+  color: #FF0000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: left;
+  z-index: 1;
+}
+
+@media screen and (max-width: 540px) {
+  .popup__item-error_active {
+    max-width: 238px;
+    margin-left: 22px;
+  }
+}
