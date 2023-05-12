@@ -1,5 +1,5 @@
 import { renderCard } from "./card";
-import { closePopup } from "./utils.js"
+import { closePopup, closePopupEsc } from "./utils.js"
 
 //init img-popup
 const imgPopup = document.querySelector('.img-popup');
@@ -23,6 +23,17 @@ const addPopupLink = document.querySelector('#add-popup__link');
 
 //init buttons close
 const closeButtons = document.querySelectorAll('.popup__button-close');
+
+//init popups
+const popups = Array.from(document.querySelectorAll('.popup'));
+
+popups.forEach(popup => {
+  popup.addEventListener('click', (evt) => {
+    if(evt.target === popup) {
+      closePopup(popup);
+    }
+  })
+})
 
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
@@ -65,7 +76,9 @@ function openPhoto() {
     imgTitle.textContent = photo.alt;
 
     imgPopup.classList.add('popup_opened');
+
+    closePopupEsc(imgPopup);
   })
 }
 
-export { openPhoto, handleEditFormSubmit, handleAddFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm };
+export { openPhoto, handleEditFormSubmit, handleAddFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, closePopupEsc };

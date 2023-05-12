@@ -1,4 +1,4 @@
-.popup__input-error {
+.popup__item-error_active {
   position: absolute;
   top: 57px;
   left: 0;
@@ -13,11 +13,10 @@
   line-height: 15px;
   text-align: left;
   z-index: 1;
-  display: none;
 }
 
 @media screen and (max-width: 540px) {
-  .popup__input-error {
+  .popup__item-error_active {
     max-width: 238px;
     margin-left: 22px;
   }

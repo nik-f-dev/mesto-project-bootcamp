@@ -6,4 +6,12 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-export { openPopup, closePopup };
+function closePopupEsc(popup) {
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+    }
+  })
+}
+
+export { openPopup, closePopup, closePopupEsc };

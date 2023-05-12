@@ -46,14 +46,14 @@
       </button>
       <h3 class="popup__title edit-popup__title">Редактировать профиль</h3>
       <label class="popup__field">
-        <input class="popup__item edit-popup__item" type="text" required placeholder="Введите имя профиля..."
-          name="profile-name" id="edit-popup__name">
-        <span class="popup__input-error">Введите</span>
+        <input class="popup__item edit-popup__item" type="text" required minlength="2" maxlength="40"
+          placeholder="Введите имя профиля..." name="profile-name" id="edit-popup__name">
+        <span class="popup__item-error edit-popup__name-error"></span>
       </label>
       <label class="popup__field">
-        <input class="popup__item edit-popup__item" type="text" required placeholder="Введите описание..."
-          name="description" id="edit-popup__description">
-        <span class="popup__input-error">Введите</span>
+        <input class="popup__item edit-popup__item" type="text" required minlength="2" maxlength="200"
+          placeholder="Введите описание..." name="description" id="edit-popup__description">
+        <span class="popup__item-error edit-popup__description-error"></span>
       </label>
       <button class="popup__button-save edit-popup__button-save" type="submit"
         id="edit-popup__save-button">Сохранить</button>
@@ -66,17 +66,17 @@
       </button>
       <h3 class="popup__title add-popup__title">Новое место</h3>
       <label class="popup__field">
-        <input class="popup__item add-popup__item" type="text" required placeholder="Название" name="place-name"
-          id="add-popup__name">
-        <span class="popup__input-error">1</span>
+        <input class="popup__item add-popup__item" type="text" required minlength="2" maxlength="30"
+          placeholder="Название" name="place-name" id="add-popup__name">
+        <span class="popup__item-error add-popup__name-error"></span>
       </label>
       <label class="popup__field">
-        <input class="popup__item add-popup__item" type="text" required placeholder="Ссылка на картинку"
+        <input class="popup__item add-popup__item" type="url" required placeholder="Ссылка на картинку"
           name="description" id="add-popup__link">
-        <span class="popup__input-error">2</span>
+        <span class="popup__item-error add-popup__link-error"></span>
       </label>
       <button class="popup__button-save add-popup__button-save" type="submit"
-        id="add-popup__save-button">Сохранить</button>
+        id="add-popup__save-button">Создать</button>
     </form>
   </div>
 
