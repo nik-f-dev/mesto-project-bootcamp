@@ -1,7 +1,7 @@
 import './../pages/index.css';
 
 import { handleEditFormSubmit, handleAddFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, } from './modal.js';
-import { openPopup, closePopupEsc } from './utils.js';
+import { openPopup } from './utils.js';
 import { renderCards } from './card.js';
 import { enableValidation } from './validate.js'
 
@@ -22,13 +22,11 @@ editButton.addEventListener('click', () => {
   editPopupDescription.value = descriptionProfile.textContent;
 
   openPopup(editPopup);
-  closePopupEsc(editPopup);
 })
 
 //open add-popup
 addButton.addEventListener('click', () => {
   openPopup(addPopup);
-  closePopupEsc(addPopup);
 })
 
 //save edit-form
@@ -40,4 +38,11 @@ elementAddForm.addEventListener('submit', handleAddFormSubmit);
 
 renderCards();
 
-enableValidation();
+enableValidation({
+  formSelector: '.popup__container_type-form',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_disable',
+  inputErrorClass: 'popup__item_type_error',
+  errorClass: 'popup__item-error_active'
+});

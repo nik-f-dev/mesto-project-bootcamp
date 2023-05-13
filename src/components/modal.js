@@ -1,5 +1,5 @@
 import { renderCard } from "./card";
-import { closePopup, closePopupEsc } from "./utils.js"
+import { closePopup, openPopup } from "./utils.js"
 
 //init img-popup
 const imgPopup = document.querySelector('.img-popup');
@@ -67,18 +67,16 @@ function handleAddFormSubmit(evt) {
   evt.target.reset();
 }
 
-function openPhoto() {
-  const gridImage = document.querySelector('.photo-grid__image');
+function openPhoto(gridItem) {
+  const gridImage = gridItem.querySelector('.photo-grid__image');
 
   gridImage.addEventListener('click', () => {
     photo.src = gridImage.src;
     photo.alt = gridImage.alt;
     imgTitle.textContent = photo.alt;
 
-    imgPopup.classList.add('popup_opened');
-
-    closePopupEsc(imgPopup);
+    openPopup(imgPopup);
   })
 }
 
-export { openPhoto, handleEditFormSubmit, handleAddFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, closePopupEsc };
+export { openPhoto, handleEditFormSubmit, handleAddFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, imgPopup, popups };

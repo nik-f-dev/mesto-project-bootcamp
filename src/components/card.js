@@ -49,7 +49,7 @@ function renderCard(element) {
 
   likeCard();
   removeCard();
-  openPhoto();
+  openPhoto(photoGridItem);
 }
 
 function renderCards() {
