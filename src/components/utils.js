@@ -1,6 +1,17 @@
 let currentPopup;
 
 function openPopup(popup) {
+  const popupButton = document.querySelector(`.${popup.id}__button-save`);
+
+  switch(popup.id) {
+    case 'edit-popup':
+    case 'add-popup':
+    case 'avatar-popup':
+      popupButton.classList.add('popup__button-save_disable');
+
+      disableButton(popupButton);
+  }
+
   currentPopup = popup;
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEsc);
@@ -26,8 +37,4 @@ function disableButton(buttonElement) {
   buttonElement.setAttribute("disabled", "");
 }
 
-function enableButton(buttonElement) {
-  buttonElement.removeAttribute("disabled");
-}
-
-export { openPopup, closePopup, changeButtonName, disableButton, enableButton };
+export { openPopup, closePopup, changeButtonName, disableButton };
