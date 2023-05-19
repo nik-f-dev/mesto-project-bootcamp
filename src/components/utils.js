@@ -22,4 +22,12 @@ function changeButtonName(buttonElement, name) {
   buttonElement.textContent = name;
 }
 
-export { openPopup, closePopup, changeButtonName };
+function disableButton(buttonElement) {
+  buttonElement.setAttribute("disabled", "");
+}
+
+function enableButton(buttonElement) {
+  buttonElement.removeAttribute("disabled");
+}
+
+export { openPopup, closePopup, changeButtonName, disableButton, enableButton };

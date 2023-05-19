@@ -1,6 +1,6 @@
 import { closePopup } from "./utils.js"
 import { changeValueProfile, addCard, changeAvatar } from "./api.js";
-import { changeButtonName } from "./utils.js";
+import { changeButtonName, disableButton } from "./utils.js";
 
 //init img-popup
 const photo = document.querySelector('.popup__photo');
@@ -64,6 +64,7 @@ function handleEditFormSubmit(evt) {
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
   changeButtonName(addPopupButtonSave, 'Создание...');
+  disableButton(addPopupButtonSave);
   closePopup(addPopup);
   addCard(addPopupName.value, addPopupLink.value);
   evt.target.reset();
