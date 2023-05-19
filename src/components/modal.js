@@ -1,13 +1,13 @@
-import { renderCard } from "./card";
-import { closePopup, closePopupEsc } from "./utils.js"
+import { closePopup } from "./utils.js"
+import { changeValueProfile, addCard, changeAvatar } from "./api.js";
+import { changeButtonName } from "./utils.js";
 
 //init img-popup
-const imgPopup = document.querySelector('.img-popup');
 const photo = document.querySelector('.popup__photo');
-const imgTitle = document.querySelector('.popup__img-title');
 
 // init profile
 const profileName = document.querySelector('.profile__title');
+const profileImage = document.querySelector('.profile__image');
 const descriptionProfile = document.querySelector('.profile__subtitle');
 
 // init edit-popup
@@ -15,14 +15,21 @@ const editPopup = document.querySelector('.edit-popup');
 const elementEditForm = document.querySelector('.edit-popup__edit-form');
 const editPopupName = document.querySelector('#edit-popup__name');
 const editPopupDescription = document.querySelector('#edit-popup__description');
+const editPopupButtonSave = document.querySelector('.popup__button-save_type_edit');
 
 // init add-popup
 const addPopup = document.querySelector('.add-popup');
 const addPopupName = document.querySelector('#add-popup__name');
 const addPopupLink = document.querySelector('#add-popup__link');
+const addPopupButtonSave = document.querySelector('.popup__button-save_type_add');
 
 //init buttons close
 const closeButtons = document.querySelectorAll('.popup__button-close');
+
+//init avatar-popup
+const avatarPopup = document.querySelector('.avatar-popup');
+const avatarPopupItem = document.querySelector('.avatar-popup__item');
+const avatarButtonSave = document.querySelector('.popup__button-save_type_avatar');
 
 //init popups
 const popups = Array.from(document.querySelectorAll('.popup'));
@@ -43,42 +50,36 @@ closeButtons.forEach((button) => {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
+  changeButtonName(editPopupButtonSave, 'Сохранение...');
 
-  profileName.textContent = editPopupName.value;
-  descriptionProfile.textContent = editPopupDescription.value;
+  changeValueProfile(editPopupName.value, editPopupDescription.value)
+    .then((data) => {
+      profileName.textContent = data.name;
+      descriptionProfile.textContent = data.about;
+    })
 
   closePopup(editPopup);
 }
 
-function addCard() {
-  const newCard = {
-    name: addPopupName.value,
-    link: addPopupLink.value,
-    alt: addPopupName.value
-  };
-
-  renderCard(newCard);
-}
-
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
+  changeButtonName(addPopupButtonSave, 'Создание...');
   closePopup(addPopup);
-  addCard();
+  addCard(addPopupName.value, addPopupLink.value);
   evt.target.reset();
 }
 
-function openPhoto() {
-  const gridImage = document.querySelector('.photo-grid__image');
+function handleAvatarFormSubmit(evt) {
+  evt.preventDefault();
 
-  gridImage.addEventListener('click', () => {
-    photo.src = gridImage.src;
-    photo.alt = gridImage.alt;
-    imgTitle.textContent = photo.alt;
+  changeButtonName(avatarButtonSave, 'Сохранение...');
 
-    imgPopup.classList.add('popup_opened');
-
-    closePopupEsc(imgPopup);
-  })
+  changeAvatar(avatarPopupItem.value)
+    .then((data) => {
+      profileImage.src = data.avatar;
+      closePopup(avatarPopup);
+      evt.target.reset();
+    });
 }
 
-export { openPhoto, handleEditFormSubmit, handleAddFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, closePopupEsc };
+export { handleEditFormSubmit, handleAddFormSubmit, handleAvatarFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, photo, avatarPopup, avatarButtonSave, addPopupButtonSave, editPopupButtonSave };

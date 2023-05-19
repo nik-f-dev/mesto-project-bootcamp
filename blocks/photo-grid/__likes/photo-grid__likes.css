@@ -1,0 +1,12 @@
+.photo-grid__likes {
+  color: black;
+  position: absolute;
+  font-size: 13px;
+  left: -4px;
+  top: 11px;
+  text-align: center;
+  width: 30px;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+}
