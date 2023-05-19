@@ -2,3 +2,7 @@
   background-image: url(./../../../../src/images/Union.svg);
   transition: background-image .4s ease-in-out;
 }
+
+.photo-grid__like_active:hover {
+  transition: .2s linear;
+}

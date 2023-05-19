@@ -11,6 +11,7 @@
   top: 21px;
   cursor: pointer;
   transition: opacity .2s ease-in-out;
+  visibility: hidden;
 }
 
 .photo-grid__button-delete:hover {
