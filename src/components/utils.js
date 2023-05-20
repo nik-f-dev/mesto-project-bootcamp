@@ -37,4 +37,11 @@ function disableButton(buttonElement) {
   buttonElement.setAttribute("disabled", "");
 }
 
-export { openPopup, closePopup, changeButtonName, disableButton };
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка ${res.status}`);
+}
+
+export { openPopup, closePopup, changeButtonName, disableButton, checkResponse };

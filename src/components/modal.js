@@ -1,6 +1,8 @@
 import { closePopup } from "./utils.js"
-import { changeValueProfile, addCard, changeAvatar } from "./api.js";
+import { changeValueProfile, addCard, changeAvatar, request, config } from "./api.js";
 import { changeButtonName, disableButton } from "./utils.js";
+import { getCards } from "./card.js";
+import { userId } from "./index.js";
 
 //init img-popup
 const photo = document.querySelector('.popup__photo');
@@ -56,18 +58,28 @@ function handleEditFormSubmit(evt) {
     .then((data) => {
       profileName.textContent = data.name;
       descriptionProfile.textContent = data.about;
+      closePopup(editPopup);
     })
+    .catch(reject => console.log(reject))
+    .finally(() => changeButtonName(editPopupButtonSave, 'Сохранить'));
 
-  closePopup(editPopup);
+
 }
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
+
   changeButtonName(addPopupButtonSave, 'Создание...');
   disableButton(addPopupButtonSave);
-  closePopup(addPopup);
-  addCard(addPopupName.value, addPopupLink.value);
-  evt.target.reset();
+
+  addCard(addPopupName.value, addPopupLink.value)
+    .then(() => {
+      getCards(userId);
+      closePopup(addPopup);
+      evt.target.reset();
+    })
+    .catch(reject => console.log(reject))
+    .finally(() => changeButtonName(addPopupButtonSave, 'Создать'));
 }
 
 function handleAvatarFormSubmit(evt) {
@@ -78,9 +90,22 @@ function handleAvatarFormSubmit(evt) {
   changeAvatar(avatarPopupItem.value)
     .then((data) => {
       profileImage.src = data.avatar;
+
       closePopup(avatarPopup);
       evt.target.reset();
-    });
+    })
+    .catch(reject => console.log(reject))
+    .finally(() => changeButtonName(avatarButtonSave, 'Сохранить'));
 }
 
-export { handleEditFormSubmit, handleAddFormSubmit, handleAvatarFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, photo, avatarPopup, avatarButtonSave, addPopupButtonSave, editPopupButtonSave };
+function uploadProfile() {
+  request('users/me', config)
+    .then((data) => {
+      profileName.textContent = data.name;
+      descriptionProfile.textContent = data.about;
+      profileImage.src = data.avatar;
+    })
+    .catch(reject => console.log(reject));
+}
+
+export { handleEditFormSubmit, handleAddFormSubmit, handleAvatarFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, photo, avatarPopup, avatarButtonSave, addPopupButtonSave, editPopupButtonSave, uploadProfile };

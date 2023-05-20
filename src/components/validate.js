@@ -66,13 +66,4 @@ function enableValidation(obj) {
   })
 }
 
-function disableButton() {
-  const buttonsSave = Array.from(document.querySelectorAll('.popup__button-save'));
-
-  buttonsSave.forEach((buttonSave) => {
-    buttonSave.setAttribute("disabled", "disabled");
-    buttonSave.classList.add('popup__button-save_disable');
-  })
-}
-
-export { enableValidation, disableButton };
+export { enableValidation };
