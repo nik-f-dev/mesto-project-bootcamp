@@ -22,4 +22,16 @@ function changeButtonName(buttonElement, name) {
   buttonElement.textContent = name;
 }
 
-export { openPopup, closePopup, changeButtonName };
+function disableButton(buttonElement) {
+  buttonElement.setAttribute("disabled", "");
+  buttonElement.classList.add('popup__button-save_disable');
+}
+
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка ${res.status}`);
+}
+
+export { openPopup, closePopup, changeButtonName, disableButton, checkResponse };

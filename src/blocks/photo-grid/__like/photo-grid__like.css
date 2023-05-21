@@ -1,5 +1,5 @@
 .photo-grid__like {
-  background-image: url(./../../../src/images/heart.svg);
+  background-image: url(./../../../images/heart.svg);
   background-repeat: no-repeat;
   background-size: contain;
   display: flex;

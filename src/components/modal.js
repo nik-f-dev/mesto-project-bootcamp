@@ -1,6 +1,7 @@
 import { closePopup } from "./utils.js"
 import { changeValueProfile, addCard, changeAvatar } from "./api.js";
-import { changeButtonName } from "./utils.js";
+import { changeButtonName, disableButton } from "./utils.js";
+import { createCard } from "./card.js";
 
 //init img-popup
 const photo = document.querySelector('.popup__photo');
@@ -56,17 +57,27 @@ function handleEditFormSubmit(evt) {
     .then((data) => {
       profileName.textContent = data.name;
       descriptionProfile.textContent = data.about;
+      closePopup(editPopup);
+      disableButton(editPopupButtonSave);
     })
-
-  closePopup(editPopup);
+    .catch(reject => console.log(reject))
+    .finally(() => changeButtonName(editPopupButtonSave, 'Сохранить'));
 }
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
+
   changeButtonName(addPopupButtonSave, 'Создание...');
-  closePopup(addPopup);
-  addCard(addPopupName.value, addPopupLink.value);
-  evt.target.reset();
+
+  addCard(addPopupName.value, addPopupLink.value)
+    .then((res) => {
+      closePopup(addPopup);
+      evt.target.reset();
+      disableButton(addPopupButtonSave);
+      createCard(res);
+    })
+    .catch(reject => console.log(reject))
+    .finally(() => changeButtonName(addPopupButtonSave, 'Создать'));
 }
 
 function handleAvatarFormSubmit(evt) {
@@ -77,9 +88,13 @@ function handleAvatarFormSubmit(evt) {
   changeAvatar(avatarPopupItem.value)
     .then((data) => {
       profileImage.src = data.avatar;
+
       closePopup(avatarPopup);
+      disableButton(avatarButtonSave);
       evt.target.reset();
-    });
+    })
+    .catch(reject => console.log(reject))
+    .finally(() => changeButtonName(avatarButtonSave, 'Сохранить'));
 }
 
-export { handleEditFormSubmit, handleAddFormSubmit, handleAvatarFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, photo, avatarPopup, avatarButtonSave, addPopupButtonSave, editPopupButtonSave };
+export { handleEditFormSubmit, handleAddFormSubmit, handleAvatarFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, photo, avatarPopup, avatarButtonSave, addPopupButtonSave, editPopupButtonSave, profileImage };
