@@ -1,6 +1,5 @@
 import { deleteCardFromServer, addLike, removeLike, request, config } from "./api.js";
-import { openPopup} from "./utils.js";
-import { userId } from "./index.js";
+import { openPopup } from "./utils.js";
 
 //init photo-grid
 const photoGrid = document.querySelector('.photo-grid');
@@ -58,20 +57,24 @@ function getCards(userId) {
 
 function likeCard(item) {
   const buttonLike = item.querySelector('.photo-grid__like');
+  const likeCounter = buttonLike.querySelector('.photo-grid__likes');
 
   buttonLike.addEventListener('click', () => {
     if(buttonLike.classList.contains('photo-grid__like_active')){
       removeLike(item.dataset.id)
         .then(() => {
           buttonLike.classList.remove('photo-grid__like_active');
-          getCards(userId);
+          likeCounter.textContent = parseInt(likeCounter.textContent) - 1;
         })
         .catch(reject => console.log(reject));
     } else {
        addLike(item.dataset.id)
         .then(() => {
           buttonLike.classList.add('photo-grid__like_active');
-          getCards(userId);
+          if(likeCounter.textContent === ''){
+            likeCounter.textContent = '0';
+          }
+          likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
         })
         .catch(reject => console.log(reject));
     }
@@ -83,7 +86,7 @@ function removeCard(item) {
 
   buttonRemove.addEventListener('click', () => {
     deleteCardFromServer(item.dataset.id)
-      .then(() => getCards(userId))
+      .then(() => buttonRemove.parentElement.remove())
       .catch(reject => console.log(reject));
       })
 }

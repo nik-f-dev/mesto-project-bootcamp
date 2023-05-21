@@ -3,13 +3,9 @@ let currentPopup;
 function openPopup(popup) {
   const popupButton = document.querySelector(`.${popup.id}__button-save`);
 
-  switch(popup.id) {
-    case 'edit-popup':
-    case 'add-popup':
-    case 'avatar-popup':
-      popupButton.classList.add('popup__button-save_disable');
-
-      disableButton(popupButton);
+  if(popup.id !== 'img-popup'){
+    popupButton.classList.add('popup__button-save_disable');
+    disableButton(popupButton);
   }
 
   currentPopup = popup;

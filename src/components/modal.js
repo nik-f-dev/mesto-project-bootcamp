@@ -73,10 +73,11 @@ function handleAddFormSubmit(evt) {
   disableButton(addPopupButtonSave);
 
   addCard(addPopupName.value, addPopupLink.value)
-    .then(() => {
+    .then((res) => {
       getCards(userId);
       closePopup(addPopup);
       evt.target.reset();
+      createCard(res, userId);
     })
     .catch(reject => console.log(reject))
     .finally(() => changeButtonName(addPopupButtonSave, 'Создать'));

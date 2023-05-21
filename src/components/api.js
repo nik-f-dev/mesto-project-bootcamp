@@ -57,6 +57,7 @@ function deleteCardFromServer(id) {
     method: 'DELETE',
     headers: config.headers,
   })
+    .then(checkResponse)
 }
 
 function changeAvatar(avatarUrl) {
