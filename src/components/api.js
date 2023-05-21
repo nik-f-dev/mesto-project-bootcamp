@@ -71,4 +71,12 @@ function changeAvatar(avatarUrl) {
     .then(checkResponse)
 }
 
-export { changeValueProfile, addCard, deleteCardFromServer, addLike, removeLike, changeAvatar, request, config };
+function getCardsInfo() {
+  return request('cards', config)
+}
+
+function getUserInfo() {
+  return request('users/me', config)
+}
+
+export { changeValueProfile, addCard, deleteCardFromServer, addLike, removeLike, changeAvatar, request, getCardsInfo, getUserInfo };

@@ -1,11 +1,10 @@
 import './../pages/index.css';
 
-import { handleEditFormSubmit, handleAddFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, handleAvatarFormSubmit } from './modal.js';
+import { handleEditFormSubmit, handleAddFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, handleAvatarFormSubmit, profileImage, avatarPopup } from './modal.js';
 import { openPopup } from './utils.js';
-import { getCards } from './card.js';
+import { getCard, photoGrid } from './card.js';
 import { enableValidation } from './validate.js';
-import { avatarPopup, uploadProfile } from './modal.js';
-import { request, config } from './api';
+import { getCardsInfo, getUserInfo } from './api';
 
 let userId;
 
@@ -24,21 +23,8 @@ const elementAddForm = document.querySelector('.add-popup__add-form');
 const elementAvatarForm = document.querySelector('.avatar-popup__avatar-form');
 const avatarEditButton = document.querySelector('.profile__edit-avatar-button');
 
-function getUserId() {
-  return request('users/me', config)
-    .then(data => {
-      return userId = data._id;
-    })
-}
-
-function getCardsInfo() {
-  return request('cards', config)
-}
-
 //open edit-popup
 editButton.addEventListener('click', () => {
-
-
   editPopupName.value = profileName.textContent;
   editPopupDescription.value = descriptionProfile.textContent;
 
@@ -62,13 +48,17 @@ avatarEditButton.addEventListener('click', () => {
 
 elementAvatarForm.addEventListener('submit', handleAvatarFormSubmit);
 
-Promise.all([getUserId(), getCardsInfo()])
-  .then(([userId, cards]) => {
-    console.log(userId);
-    console.log(cards);
+Promise.all([getUserInfo(), getCardsInfo()])
+  .then(([userInfo, cards]) => {
+    userId = userInfo._id;
 
-    getCards(userId);
-    uploadProfile();
+    cards.forEach((card) => {
+      photoGrid.append(getCard(card));
+    });
+
+    profileName.textContent = userInfo.name;
+    descriptionProfile.textContent = userInfo.about;
+    profileImage.src = userInfo.avatar;
   })
   .catch(reject => console.log(reject));
 

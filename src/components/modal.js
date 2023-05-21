@@ -1,8 +1,7 @@
 import { closePopup } from "./utils.js"
-import { changeValueProfile, addCard, changeAvatar, request, config } from "./api.js";
+import { changeValueProfile, addCard, changeAvatar } from "./api.js";
 import { changeButtonName, disableButton } from "./utils.js";
-import { getCards } from "./card.js";
-import { userId } from "./index.js";
+import { createCard } from "./card.js";
 
 //init img-popup
 const photo = document.querySelector('.popup__photo');
@@ -59,25 +58,23 @@ function handleEditFormSubmit(evt) {
       profileName.textContent = data.name;
       descriptionProfile.textContent = data.about;
       closePopup(editPopup);
+      disableButton(editPopupButtonSave);
     })
     .catch(reject => console.log(reject))
     .finally(() => changeButtonName(editPopupButtonSave, 'Сохранить'));
-
-
 }
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
 
   changeButtonName(addPopupButtonSave, 'Создание...');
-  disableButton(addPopupButtonSave);
 
   addCard(addPopupName.value, addPopupLink.value)
     .then((res) => {
-      getCards(userId);
       closePopup(addPopup);
       evt.target.reset();
-      createCard(res, userId);
+      disableButton(addPopupButtonSave);
+      createCard(res);
     })
     .catch(reject => console.log(reject))
     .finally(() => changeButtonName(addPopupButtonSave, 'Создать'));
@@ -93,20 +90,11 @@ function handleAvatarFormSubmit(evt) {
       profileImage.src = data.avatar;
 
       closePopup(avatarPopup);
+      disableButton(avatarButtonSave);
       evt.target.reset();
     })
     .catch(reject => console.log(reject))
     .finally(() => changeButtonName(avatarButtonSave, 'Сохранить'));
 }
 
-function uploadProfile() {
-  request('users/me', config)
-    .then((data) => {
-      profileName.textContent = data.name;
-      descriptionProfile.textContent = data.about;
-      profileImage.src = data.avatar;
-    })
-    .catch(reject => console.log(reject));
-}
-
-export { handleEditFormSubmit, handleAddFormSubmit, handleAvatarFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, photo, avatarPopup, avatarButtonSave, addPopupButtonSave, editPopupButtonSave, uploadProfile };
+export { handleEditFormSubmit, handleAddFormSubmit, handleAvatarFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, photo, avatarPopup, avatarButtonSave, addPopupButtonSave, editPopupButtonSave, profileImage };

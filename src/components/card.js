@@ -1,5 +1,6 @@
-import { deleteCardFromServer, addLike, removeLike, request, config } from "./api.js";
+import { deleteCardFromServer, addLike, removeLike } from "./api.js";
 import { openPopup } from "./utils.js";
+import { userId } from "./index.js";
 
 //init photo-grid
 const photoGrid = document.querySelector('.photo-grid');
@@ -12,7 +13,7 @@ const imgPopup = document.querySelector('.img-popup');
 //init and clone template
 const templatePhotoGrid = document.querySelector('#template').content;
 
-function createCard(item, userId) {
+function getCard(item) {
   const cardElement = templatePhotoGrid.querySelector(':first-child').cloneNode(true);
   const cardElementImage = cardElement.querySelector('.photo-grid__image');
 
@@ -41,18 +42,12 @@ function createCard(item, userId) {
   likeCard(cardElement);
   removeCard(cardElement);
 
-  photoGrid.prepend(cardElement);
+  return cardElement;
 }
 
-function getCards(userId) {
-  request('cards', config)
-    .then((data) => {
-      photoGrid.replaceChildren('');
-      data.reverse().forEach((card) => {
-        createCard(card, userId);
-      });
-    })
-    .catch(err => console.log(err));
+function createCard(item) {
+  const cards = getCard(item, userId);
+  photoGrid.prepend(cards);
 }
 
 function likeCard(item) {
@@ -62,19 +57,16 @@ function likeCard(item) {
   buttonLike.addEventListener('click', () => {
     if(buttonLike.classList.contains('photo-grid__like_active')){
       removeLike(item.dataset.id)
-        .then(() => {
+        .then((data) => {
           buttonLike.classList.remove('photo-grid__like_active');
-          likeCounter.textContent = parseInt(likeCounter.textContent) - 1;
+          likeCounter.textContent = data.likes.length;
         })
         .catch(reject => console.log(reject));
     } else {
        addLike(item.dataset.id)
-        .then(() => {
+        .then((data) => {
           buttonLike.classList.add('photo-grid__like_active');
-          if(likeCounter.textContent === ''){
-            likeCounter.textContent = '0';
-          }
-          likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
+          likeCounter.textContent = data.likes.length;
         })
         .catch(reject => console.log(reject));
     }
@@ -86,7 +78,7 @@ function removeCard(item) {
 
   buttonRemove.addEventListener('click', () => {
     deleteCardFromServer(item.dataset.id)
-      .then(() => buttonRemove.parentElement.remove())
+      .then(() => buttonRemove.closest('.photo-grid__item').remove())
       .catch(reject => console.log(reject));
       })
 }
@@ -102,4 +94,4 @@ function openPhoto(image) {
   })
 }
 
-export { getCards };
+export { getCard, createCard, photoGrid };

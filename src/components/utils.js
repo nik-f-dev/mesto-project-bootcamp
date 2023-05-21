@@ -1,13 +1,6 @@
 let currentPopup;
 
 function openPopup(popup) {
-  const popupButton = document.querySelector(`.${popup.id}__button-save`);
-
-  if(popup.id !== 'img-popup'){
-    popupButton.classList.add('popup__button-save_disable');
-    disableButton(popupButton);
-  }
-
   currentPopup = popup;
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEsc);
@@ -31,6 +24,7 @@ function changeButtonName(buttonElement, name) {
 
 function disableButton(buttonElement) {
   buttonElement.setAttribute("disabled", "");
+  buttonElement.classList.add('popup__button-save_disable');
 }
 
 function checkResponse(res) {
