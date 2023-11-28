@@ -1,11 +1,12 @@
 import './../pages/index.css';
 
-import { handleEditFormSubmit, handleAddFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, handleAvatarFormSubmit } from './modal.js';
-import { changeButtonName, openPopup } from './utils.js';
-import { renderCards } from './card.js';
+import { handleEditFormSubmit, handleAddFormSubmit, addPopup, profileName, descriptionProfile, editPopup, elementEditForm, handleAvatarFormSubmit, profileImage, avatarPopup } from './modal.js';
+import { openPopup } from './utils.js';
+import { getCard, photoGrid } from './card.js';
 import { enableValidation } from './validate.js';
-import { uploadProfile } from './api.js';
-import { avatarPopup, avatarButtonSave, addPopupButtonSave, editPopupButtonSave } from './modal.js';
+import { getCardsInfo, getUserInfo } from './api';
+
+let userId;
 
 // init profile
 const editButton = document.querySelector('.profile__edit-button');
@@ -27,13 +28,11 @@ editButton.addEventListener('click', () => {
   editPopupName.value = profileName.textContent;
   editPopupDescription.value = descriptionProfile.textContent;
 
-  changeButtonName(editPopupButtonSave, 'Сохранить');
   openPopup(editPopup);
 })
 
 //open add-popup
 addButton.addEventListener('click', () => {
-  changeButtonName(addPopupButtonSave, 'Создать');
   openPopup(addPopup);
 })
 
@@ -44,14 +43,32 @@ elementEditForm.addEventListener('submit', handleEditFormSubmit);
 elementAddForm.addEventListener('submit', handleAddFormSubmit);
 
 avatarEditButton.addEventListener('click', () => {
-  changeButtonName(avatarButtonSave, 'Сохранить');
   openPopup(avatarPopup);
 });
 
 elementAvatarForm.addEventListener('submit', handleAvatarFormSubmit);
 
-uploadProfile();
+Promise.all([getUserInfo(), getCardsInfo()])
+  .then(([userInfo, cards]) => {
+    userId = userInfo._id;
 
-renderCards();
+    cards.forEach((card) => {
+      photoGrid.append(getCard(card));
+    });
 
-enableValidation();
+    profileName.textContent = userInfo.name;
+    descriptionProfile.textContent = userInfo.about;
+    profileImage.src = userInfo.avatar;
+  })
+  .catch(reject => console.log(reject));
+
+enableValidation({
+  formSelector: '.popup__container_type-form',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_disable',
+  inputErrorClass: 'popup__item_type_error',
+  errorClass: 'popup__item-error_active'
+});
+
+export { userId };

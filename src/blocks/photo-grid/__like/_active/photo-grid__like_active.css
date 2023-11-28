@@ -1,5 +1,5 @@
 .photo-grid__like_active {
-  background-image: url(./../../../../src/images/Union.svg);
+  background-image: url(./../../../../images/Union.svg);
   transition: background-image .4s ease-in-out;
 }
 

@@ -1,5 +1,6 @@
-import { search, deleteCardFromServer, addLike, removeLike } from "./api";
-import { closePopup, openPopup, changeButtonName } from "./utils";
+import { deleteCardFromServer, addLike, removeLike } from "./api.js";
+import { openPopup } from "./utils.js";
+import { userId } from "./index.js";
 
 //init photo-grid
 const photoGrid = document.querySelector('.photo-grid');
@@ -11,14 +12,13 @@ const imgPopup = document.querySelector('.img-popup');
 
 //init and clone template
 const templatePhotoGrid = document.querySelector('#template').content;
-const deleteButton = document.querySelector('#delete-popup__save-button');
-const deletePopup = document.querySelector('.delete-popup');
 
-function createCard(item) {
+function getCard(item) {
   const cardElement = templatePhotoGrid.querySelector(':first-child').cloneNode(true);
+  const cardElementImage = cardElement.querySelector('.photo-grid__image');
 
-  cardElement.querySelector('.photo-grid__image').src = item.link;
-  cardElement.querySelector('.photo-grid__image').alt = item.name;
+  cardElementImage.src = item.link;
+  cardElementImage.alt = item.name;
   cardElement.querySelector('.photo-grid__title').textContent = item.name;
 
   if(item.likes.length > 0) {
@@ -27,88 +27,60 @@ function createCard(item) {
 
   cardElement.dataset.id = item._id;
 
-  if(item.owner._id === '9cfb4c2414d52e5ba6a8acdd') {
+  if(item.owner._id === userId) {
     cardElement.querySelector('.photo-grid__button-delete').classList.add('photo-grid__button-delete_active');
   }
 
   if(item.likes.some((like) => {
-    return like._id === '9cfb4c2414d52e5ba6a8acdd';
+    return like._id === userId;
   })) {
     const buttonLike = cardElement.querySelector('.photo-grid__like');
     buttonLike.classList.add('photo-grid__like_active');
   }
 
-  const image = cardElement.querySelector('.photo-grid__image');
-  openPhoto(image);
+  openPhoto(cardElementImage);
+  likeCard(cardElement);
+  removeCard(cardElement);
 
   return cardElement;
 }
 
-function renderCard(element) {
-  const photoGridItem = createCard(element);
-
-  photoGrid.prepend(photoGridItem);
-
-  likeCard(photoGridItem);
-  removeCard(photoGridItem);
-}
-
-function renderCards() {
-  search('cards')
-    .then((data) => {
-      photoGrid.replaceChildren('');
-      data.reverse().forEach(renderCard);
-    })
-    .catch(err => console.log(err));
+function createCard(item) {
+  const cards = getCard(item, userId);
+  photoGrid.prepend(cards);
 }
 
 function likeCard(item) {
   const buttonLike = item.querySelector('.photo-grid__like');
+  const likeCounter = buttonLike.querySelector('.photo-grid__likes');
 
   buttonLike.addEventListener('click', () => {
     if(buttonLike.classList.contains('photo-grid__like_active')){
       removeLike(item.dataset.id)
-        .then(() => {
+        .then((data) => {
           buttonLike.classList.remove('photo-grid__like_active');
-          renderCards();
+          likeCounter.textContent = data.likes.length;
         })
+        .catch(reject => console.log(reject));
     } else {
        addLike(item.dataset.id)
-      .then(() => {
-        buttonLike.classList.add('photo-grid__like_active');
-        renderCards();
-      })
+        .then((data) => {
+          buttonLike.classList.add('photo-grid__like_active');
+          likeCounter.textContent = data.likes.length;
+        })
+        .catch(reject => console.log(reject));
     }
   });
 }
 
 function removeCard(item) {
   const buttonRemove = item.querySelector('.photo-grid__button-delete');
-  const photoGridItem = item;
 
   buttonRemove.addEventListener('click', () => {
-    changeButtonName(deleteButton, 'Да');
-    openPopup(deletePopup);
-    deleteCard(photoGridItem);
-  })
-}
-
-function deleteCard(item) {
-  deleteButton.addEventListener('click', (evt) => {
-    evt.preventDefault();
-
     deleteCardFromServer(item.dataset.id)
-    .then(res => {
-      if (res.ok) {
-        renderCards();
-        changeButtonName(deleteButton, 'Удаление..');
-        closePopup(deletePopup);
-        return;
-      }
-      return Promise.reject(`${res.status}`);
-    })
-    .catch(err => console.log(err));
-  })
+      .then(() => buttonRemove.closest('.photo-grid__item').remove())
+      .catch(reject => console.log(reject));
+      })
 }
 
 function openPhoto(image) {
@@ -122,4 +94,4 @@ function openPhoto(image) {
   })
 }
 
-export { renderCards, renderCard };
+export { getCard, createCard, photoGrid };
